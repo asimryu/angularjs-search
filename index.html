@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>AngularJs Search 1</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js
+"></script>
+</head>
+<body ng-app="myApp" ng-controller="myFriends">
+
+	<p>name:<input type="text" ng-model="searchname">	</p>	
+	<ul>
+			<li ng-repeat="friend in friends" ng-if="friend.name.match(searchname)">
+				{{friend.name}}
+			</li>
+	</ul>
+	
+	<script>
+		var app = angular.module('myApp',[]);
+		app.controller('myFriends',function($scope,$http){
+			$http.get("friends.json").then(function(res){
+				$scope.friends = res.data;
+			});
+		});
+	</script>		
+
+</body>
+</html>

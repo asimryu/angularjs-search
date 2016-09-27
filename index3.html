@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJs search - 3</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script>
+        var app = angular.module('todoApp', []);
+        app.controller('TodoListController', function($scope,$http) {
+            $http.get("friends.json").then(function(res){
+                $scope.friends = res.data;
+            });
+        });
+    </script>
+</head>
+<body>
+    <div ng-app="todoApp" ng-controller="TodoListController">
+        <input ng-model="name">
+        <ul>
+            <li ng-repeat="friend in friends" ng-if="
+            ( friend.name.substring(0,name.length) == name)">
+                {{friend.name}}
+                {{friend.phone}}
+                {{friend.email}}
+                {{friend.birth}}
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

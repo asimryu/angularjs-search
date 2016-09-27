@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJs search - 4</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('MyFriends', function($scope,$http) {
+            $http.get("friends.json").then(function(res){
+                $scope.friends = res.data;
+            });
+        });
+    </script>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="MyFriends">
+        <input ng-model="name">
+        <ul>
+            <li ng-repeat="friend in friends" ng-if="name === unfined?true:friend.name.indexOf(name) >=0">
+                {{friend.name}}
+                {{friend.phone}}
+                {{friend.email}}
+                {{friend.birth}}
+            </li>
+           
+        </ul>
+    </div>
+</body>
+</html>
